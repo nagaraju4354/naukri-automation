@@ -35,8 +35,16 @@ ${AI_CHAT_POPUP}        xpath=//div[contains(@class,'botInterface') or contains(
 *** Keywords ***
 Open Naukri Browser
     [Documentation]    Launch Chrome and open Naukri homepage
-    Open Browser    ${NAUKRI_URL}    ${BROWSER}
-    Maximize Browser Window
+    ${chrome_options}=    Evaluate
+    ...    sys.modules['selenium.webdriver'].ChromeOptions()
+    ...    sys, selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    --headless
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${chrome_options}    add_argument    --disable-gpu
+    Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
+    Call Method    ${chrome_options}    add_argument    --disable-extensions
+    Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=${chrome_options}
     Set Selenium Timeout    ${TIMEOUT}
     Log    Browser opened: ${NAUKRI_URL}
 
@@ -122,13 +130,12 @@ Update Name And Save
     ${name_visible}=    Run Keyword And Return Status
     ...    Wait Until Element Is Visible    ${NAME_FIELD}    timeout=8s
     IF    ${name_visible}
-       # Triple Click Element    ${NAME_FIELD}
-        Clear Element text     ${NAME_FIELD}
+        Triple Click Element    ${NAME_FIELD}
         Input Text              ${NAME_FIELD}    ${new_name}
         Log    ✅ Entered name: ${new_name}
     ELSE
         Wait Until Element Is Visible    ${FIRST_NAME_FIELD}    timeout=8s
-        #Triple Click Element             ${FIRST_NAME_FIELD}
+        Triple Click Element             ${FIRST_NAME_FIELD}
         Input Text                       ${FIRST_NAME_FIELD}    ${new_name}
         Log    ✅ Entered name in first name field: ${new_name}
     END

@@ -2,8 +2,8 @@ name: Naukri Daily Automation
 
 on:
   schedule:
-    - cron: '30 18 * * *'   # 18:30 UTC = 12:00 AM IST every day
-  workflow_dispatch:          # Allow manual trigger from GitHub UI
+    - cron: '30 18 * * *'
+  workflow_dispatch:
 
 jobs:
   naukri-automation:
@@ -11,40 +11,53 @@ jobs:
     timeout-minutes: 30
 
     steps:
-
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Install Chrome & ChromeDriver
+      - name: Install Chrome
         run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+
+      - name: Install ChromeDriver
+        run: |
           pip install webdriver-manager
+          python -c "from webdriver_manager.chrome import ChromeDriverManager; ChromeDriverManager().install()"
+
+      - name: Create results directory
+        run: mkdir -p results
 
       - name: Run Robot Framework Tests
         run: |
-          robot --outputdir results naukri_login_profile.robot
-        continue-on-error: true   # Don't stop — always send email even if tests fail
+          robot --outputdir results naukri_login_profile.robot || true
+
+      - name: Check results exist
+        run: |
+          ls -la results/ || echo "No results folder found"
 
       - name: Send Email Report
         env:
-          SENDER_EMAIL:    ${{ secrets.SENDER_EMAIL }}
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
           RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
         run: python send_report.py
 
-      - name: Upload Results as Artifact
+      - name: Upload Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: naukri-report-${{ github.run_number }}
           path: results/
+          if-no-files-found: warn
           retention-days: 30
