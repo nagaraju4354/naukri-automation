@@ -19,21 +19,15 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install Chrome
         run: |
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          google-chrome --version
-
-      - name: Install ChromeDriver
-        run: |
+          pip install robotframework
+          pip install robotframework-seleniumlibrary
+          pip install selenium
           pip install webdriver-manager
-          python -c "from webdriver_manager.chrome import ChromeDriverManager; ChromeDriverManager().install()"
 
       - name: Create results directory
         run: mkdir -p results
@@ -42,11 +36,12 @@ jobs:
         run: |
           robot --outputdir results naukri_login_profile.robot || true
 
-      - name: Check results exist
-        run: |
-          ls -la results/ || echo "No results folder found"
+      - name: List results
+        if: always()
+        run: ls -la results/ || echo "Results folder empty"
 
       - name: Send Email Report
+        if: always()
         env:
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}

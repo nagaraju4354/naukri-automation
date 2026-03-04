@@ -34,16 +34,14 @@ ${AI_CHAT_POPUP}        xpath=//div[contains(@class,'botInterface') or contains(
 
 *** Keywords ***
 Open Naukri Browser
-    [Documentation]    Launch Chrome and open Naukri homepage
-    ${chrome_options}=    Evaluate
-    ...    sys.modules['selenium.webdriver'].ChromeOptions()
-    ...    sys, selenium.webdriver
-    Call Method    ${chrome_options}    add_argument    --headless
+    [Documentation]    Launch Chrome — headless on CI, normal locally
+    ${chrome_options}=    Evaluate    selenium.webdriver.ChromeOptions()    selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    --headless=new
     Call Method    ${chrome_options}    add_argument    --no-sandbox
     Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
     Call Method    ${chrome_options}    add_argument    --disable-gpu
     Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
-    Call Method    ${chrome_options}    add_argument    --disable-extensions
+    Call Method    ${chrome_options}    add_argument    --remote-debugging-port=9222
     Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=${chrome_options}
     Set Selenium Timeout    ${TIMEOUT}
     Log    Browser opened: ${NAUKRI_URL}
