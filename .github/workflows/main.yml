@@ -1,0 +1,7 @@
+☁️  GitHub Cloud Server
+  ├── Install Chrome + Python
+  ├── Run: robot naukri_login_profile.robot
+  ├── Run: python send_report.py
+  └── Email → kottunagaraju.4354@gmail.com
+              ├── Subject: [Naukri Automation] Daily Report — ✅ PASSED
+              └── Attachment: naukri_report_05-Jun-2025.html
