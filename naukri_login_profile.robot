@@ -17,6 +17,7 @@ TC_001 Login Update Name And Save
     [Tags]    smoke    positive
     Login To Naukri        ${USERNAME}    ${PASSWORD}
     Click View Profile
+    Capture Page Screenshot    filename=profile_page.png
     Click Edit Pencil Icon
     Update Name And Save
     Log    ✅ Name updated to 'Naga Raju Kottu' and saved successfully
