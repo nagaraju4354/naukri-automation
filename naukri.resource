@@ -114,16 +114,27 @@ Click View Profile
 Click Edit Pencil Icon
     [Documentation]    Click the pencil/edit icon next to name on profile page
     Sleep    3s
+    Execute Javascript    window.scrollTo(0, 0)
+    Sleep    1s
+    # Hover over profile heading to make edit icon visible
+    ${heading_found}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${PROFILE_PAGE_HEADING}    timeout=10s
+    IF    ${heading_found}
+        Mouse Over    ${PROFILE_PAGE_HEADING}
+        Sleep    1s
+    END
+    # Try standard click
     ${clicked}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${EDIT_PENCIL_ICON}    timeout=10s
+    ...    Wait Until Element Is Visible    ${EDIT_PENCIL_ICON}    timeout=8s
     IF    ${clicked}
         Click Element    ${EDIT_PENCIL_ICON}
         Log    ✅ Clicked pencil icon via standard click
     ELSE
+        # JS fallback — try many possible selectors
         ${js_ok}=    Execute Javascript
-        ...    var el = document.querySelector("em.icon.edit, [class*='editIcon'], [class*='edit-icon'], button[class*='edit'], [data-ga-track*='edit']"); if(el){el.click();return true;}return false;
+        ...    var s=['em.icon.edit','[class*="editIcon"]','[class*="edit-icon"]','button[class*="edit"]','span[class*="edit"]','i[class*="edit"]','[class*="pencil"]','[aria-label*="Edit"]','[title*="Edit"]']; for(var i=0;i<s.length;i++){var el=document.querySelector(s[i]);if(el){el.scrollIntoView();el.click();return s[i];}} return false;
         Run Keyword If    not ${js_ok}    Fail    Edit pencil icon not found on profile page
-        Log    ✅ Clicked pencil icon via JavaScript fallback
+        Log    ✅ Clicked pencil icon via JS: ${js_ok}
     END
     Log    ✅ Edit pencil icon clicked — form should be open now
 
