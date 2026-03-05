@@ -35,12 +35,7 @@ ${AI_CHAT_POPUP}        xpath=//div[contains(@class,'botInterface') or contains(
 *** Keywords ***
 Open Naukri Browser
     [Documentation]    Launch Chrome and open Naukri homepage
-    ${options}=    Evaluate    selenium.webdriver.ChromeOptions()    selenium.webdriver
-    Call Method    ${options}    add_argument    --headless=new
-    Call Method    ${options}    add_argument    --no-sandbox
-    Call Method    ${options}    add_argument    --disable-dev-shm-usage
-    Call Method    ${options}    add_argument    --window-size\=1920,1080
-    Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=${options}
+    Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=add_argument("--headless=new");add_argument("--no-sandbox");add_argument("--disable-dev-shm-usage");add_argument("--window-size=1920,1080")
     Set Selenium Timeout    ${TIMEOUT}
     Log    Browser opened: ${NAUKRI_URL}
 
