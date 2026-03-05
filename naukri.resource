@@ -20,7 +20,7 @@ ${SUBMIT_BTN}           xpath=//button[@type='submit' and contains(text(),'Login
 ${USER_AVATAR}          xpath=//div[contains(@class,'nI-gNb-drawer__icon')]
 ${VIEW_PROFILE_LINK}    xpath=//a[contains(text(),'View & Update Profile')]
 ${PROFILE_PAGE_HEADING}    xpath=//div[contains(@class,'name-heading') or contains(@class,'nameHeading') or contains(@class,'profileName')]
-${EDIT_PENCIL_ICON}     xpath=//em[contains(@class,'icon edit')]
+${EDIT_PENCIL_ICON}     xpath=//em[contains(@class,'icon') and contains(@class,'edit')] | //*[contains(@class,'editIcon')] | //*[contains(@class,'edit-icon')] | //button[contains(@class,'edit')]
 
 # Edit Form Locators
 ${UPDATED_NAME}          Naga Raju Kottu
@@ -113,15 +113,16 @@ Click View Profile
 
 Click Edit Pencil Icon
     [Documentation]    Click the pencil/edit icon next to name on profile page
-    # Try direct visible click first
+    Sleep    3s
     ${clicked}=    Run Keyword And Return Status
-    ...    Wait Until Element Is Visible    ${EDIT_PENCIL_ICON}    timeout=8s
+    ...    Wait Until Element Is Visible    ${EDIT_PENCIL_ICON}    timeout=10s
     IF    ${clicked}
         Click Element    ${EDIT_PENCIL_ICON}
         Log    ✅ Clicked pencil icon via standard click
     ELSE
-        # Fallback: JavaScript click on any edit icon near the name
-        Execute Javascript    document.querySelector("em.icon.edit").click()
+        ${js_ok}=    Execute Javascript
+        ...    var el = document.querySelector("em.icon.edit, [class*='editIcon'], [class*='edit-icon'], button[class*='edit'], [data-ga-track*='edit']"); if(el){el.click();return true;}return false;
+        Run Keyword If    not ${js_ok}    Fail    Edit pencil icon not found on profile page
         Log    ✅ Clicked pencil icon via JavaScript fallback
     END
     Log    ✅ Edit pencil icon clicked — form should be open now
