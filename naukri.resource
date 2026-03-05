@@ -19,7 +19,7 @@ ${SUBMIT_BTN}           xpath=//button[@type='submit' and contains(text(),'Login
 # Profile Locators
 ${USER_AVATAR}          xpath=//div[contains(@class,'nI-gNb-drawer__icon')]
 ${VIEW_PROFILE_LINK}    xpath=//a[contains(text(),'View & Update Profile')]
-${PROFILE_PAGE_HEADING} xpath=//div[contains(@class,'name-heading') or contains(@class,'nameHeading') or contains(@class,'profileName')]
+${PROFILE_PAGE_HEADING}    xpath=//div[contains(@class,'name-heading') or contains(@class,'nameHeading') or contains(@class,'profileName')]
 ${EDIT_PENCIL_ICON}     xpath=//em[contains(@class,'icon edit')]
 
 # Edit Form Locators
@@ -35,8 +35,12 @@ ${AI_CHAT_POPUP}        xpath=//div[contains(@class,'botInterface') or contains(
 *** Keywords ***
 Open Naukri Browser
     [Documentation]    Launch Chrome and open Naukri homepage
-    Open Browser    ${NAUKRI_URL}    ${BROWSER}
-    Maximize Browser Window
+    ${options}=    Evaluate    selenium.webdriver.ChromeOptions()    selenium.webdriver
+    Call Method    ${options}    add_argument    --headless=new
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${options}    add_argument    --window-size\=1920,1080
+    Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=${options}
     Set Selenium Timeout    ${TIMEOUT}
     Log    Browser opened: ${NAUKRI_URL}
 
