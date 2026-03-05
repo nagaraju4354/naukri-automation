@@ -11,7 +11,7 @@ ${PASSWORD}         Idntknow
 ${TIMEOUT}          15s
 
 # Login Locators
-${LOGIN_BTN_NAV}        xpath=//a[contains(@href,'login') and contains(text(),'Login')]
+${LOGIN_BTN_NAV}        xpath=//a[contains(@href,'login')] | //button[contains(normalize-space(text()),'Login')] | //a[normalize-space(text())='Login']
 ${EMAIL_FIELD}          xpath=//input[@placeholder='Enter your active Email ID / Username']
 ${PASSWORD_FIELD}       xpath=//input[@placeholder='Enter your password']
 ${SUBMIT_BTN}           xpath=//button[@type='submit' and contains(text(),'Login')]
@@ -35,13 +35,14 @@ ${AI_CHAT_POPUP}        xpath=//div[contains(@class,'botInterface') or contains(
 *** Keywords ***
 Open Naukri Browser
     [Documentation]    Launch Chrome and open Naukri homepage
-    Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=add_argument("--headless=new");add_argument("--no-sandbox");add_argument("--disable-dev-shm-usage");add_argument("--window-size=1920,1080")
+    Open Browser    ${NAUKRI_URL}    ${BROWSER}    options=add_argument("--headless=new");add_argument("--no-sandbox");add_argument("--disable-dev-shm-usage");add_argument("--window-size=1920,1080");add_argument("--disable-blink-features=AutomationControlled");add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     Set Selenium Timeout    ${TIMEOUT}
     Log    Browser opened: ${NAUKRI_URL}
 
 Click Login Nav Button
     [Documentation]    Click the Login button in the top navigation bar
-    Wait Until Element Is Visible    ${LOGIN_BTN_NAV}    timeout=${TIMEOUT}
+    Wait Until Page Contains Element    ${LOGIN_BTN_NAV}    timeout=25s
+    Scroll Element Into View    ${LOGIN_BTN_NAV}
     Click Element    ${LOGIN_BTN_NAV}
     Log    Clicked Login nav button
 
