@@ -93,13 +93,23 @@ Login To Naukri
     Log    ✅ Successfully logged in as ${email}
 
 Click View Profile
-    [Documentation]    Click user avatar then click View & Update Profile link
-    Wait Until Element Is Visible    ${USER_AVATAR}         timeout=${TIMEOUT}
-    Click Element                    ${USER_AVATAR}
-    Wait Until Element Is Visible    ${VIEW_PROFILE_LINK}   timeout=${TIMEOUT}
-    Click Element                    ${VIEW_PROFILE_LINK}
-    Wait Until Location Contains     profile                timeout=${TIMEOUT}
-    Log    ✅ Clicked View Profile — now on profile page
+    [Documentation]    Navigate to profile page — try UI avatar first, fall back to direct URL
+    ${avatar_found}=    Run Keyword And Return Status
+    ...    Wait Until Element Is Visible    ${USER_AVATAR}    timeout=10s
+    IF    ${avatar_found}
+        Click Element    ${USER_AVATAR}
+        ${link_found}=    Run Keyword And Return Status
+        ...    Wait Until Element Is Visible    ${VIEW_PROFILE_LINK}    timeout=8s
+        IF    ${link_found}
+            Click Element    ${VIEW_PROFILE_LINK}
+        ELSE
+            Go To    ${PROFILE_URL}
+        END
+    ELSE
+        Go To    ${PROFILE_URL}
+    END
+    Wait Until Location Contains    profile    timeout=${TIMEOUT}
+    Log    ✅ On profile page
 
 Click Edit Pencil Icon
     [Documentation]    Click the pencil/edit icon next to name on profile page
