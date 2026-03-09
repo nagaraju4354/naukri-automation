@@ -33,6 +33,9 @@ jobs:
         run: mkdir -p results
 
       - name: Run Robot Framework Tests
+        env:
+          NAUKRI_USERNAME: ${{ secrets.NAUKRI_USERNAME }}
+          NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
         run: |
           robot --outputdir results naukri_login_profile.robot || true
 

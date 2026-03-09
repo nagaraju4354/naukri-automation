@@ -6,9 +6,8 @@ Suite Teardown    Close Naukri Browser
 Test Tags         naukri    smoke
 
 *** Variables ***
-${USERNAME}    nagaraju.251n@gmail.com
-${PASSWORD}    Idntknow
-
+${USERNAME}    %{NAUKRI_USERNAME}
+${PASSWORD}    %{NAUKRI_PASSWORD}
 *** Test Cases ***
 
 TC_001 Login Update Name And Save
