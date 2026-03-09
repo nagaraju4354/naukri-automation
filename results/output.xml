@@ -1,131 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.14.3 on win32)" generated="2026-03-04T23:43:45.456602" rpa="false" schemaversion="5">
+<robot generator="Robot 7.0 (Python 3.14.3 on win32)" generated="2026-03-05T13:23:10.387752" rpa="false" schemaversion="5">
 <suite id="s1" name="Naukri Login Profile" source="C:\Users\kottu\Downloads\naukri\naukri_login_profile.robot">
 <kw name="Open Naukri Browser" owner="naukri" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:45.623003" level="INFO">Opening browser 'chrome' to base url 'https://www.naukri.com'.</msg>
+<msg time="2026-03-05T13:23:10.569277" level="INFO">Opening browser 'chrome' to base url 'https://www.naukri.com'.</msg>
 <arg>${NAUKRI_URL}</arg>
 <arg>${BROWSER}</arg>
+<arg>options=add_argument("--headless=new");add_argument("--no-sandbox");add_argument("--disable-dev-shm-usage");add_argument("--window-size=1920,1080");add_argument("--disable-blink-features=AutomationControlled");add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-03-04T23:43:45.622773" elapsed="3.518052"/>
-</kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.141151" elapsed="0.064269"/>
+<status status="PASS" start="2026-03-05T13:23:10.569037" elapsed="3.961959"/>
 </kw>
 <kw name="Set Selenium Timeout" owner="SeleniumLibrary">
 <arg>${TIMEOUT}</arg>
 <doc>Sets the timeout that is used by various keywords.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.205661" elapsed="0.001629"/>
+<status status="PASS" start="2026-03-05T13:23:14.531237" elapsed="0.001147"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:49.208004" level="INFO">Browser opened: https://www.naukri.com</msg>
+<msg time="2026-03-05T13:23:14.532721" level="INFO">Browser opened: https://www.naukri.com</msg>
 <arg>Browser opened: ${NAUKRI_URL}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.207645" elapsed="0.000467"/>
+<status status="PASS" start="2026-03-05T13:23:14.532551" elapsed="0.000204"/>
 </kw>
 <doc>Launch Chrome and open Naukri homepage</doc>
-<status status="PASS" start="2026-03-04T23:43:45.622148" elapsed="3.586108"/>
+<status status="PASS" start="2026-03-05T13:23:10.568487" elapsed="3.964328"/>
 </kw>
 <test id="s1-t1" name="TC_001 Login Update Name And Save" line="14">
 <kw name="Login To Naukri" owner="naukri">
 <kw name="Click Login Nav Button" owner="naukri">
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
 <arg>${LOGIN_BTN_NAV}</arg>
-<arg>timeout=${TIMEOUT}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.211753" elapsed="0.043259"/>
+<arg>timeout=25s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2026-03-05T13:23:14.534035" elapsed="0.010568"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${LOGIN_BTN_NAV}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-03-05T13:23:14.544776" elapsed="0.291994"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:49.255457" level="INFO">Clicking element 'xpath=//a[contains(@href,'login') and contains(text(),'Login')]'.</msg>
+<msg time="2026-03-05T13:23:14.837169" level="INFO">Clicking element 'xpath=//a[contains(@href,'login')] | //button[contains(normalize-space(text()),'Login')] | //a[normalize-space(text())='Login']'.</msg>
 <arg>${LOGIN_BTN_NAV}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.255214" elapsed="0.135679"/>
+<status status="PASS" start="2026-03-05T13:23:14.836945" elapsed="0.075321"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:49.391523" level="INFO">Clicked Login nav button</msg>
+<msg time="2026-03-05T13:23:14.912732" level="INFO">Clicked Login nav button</msg>
 <arg>Clicked Login nav button</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.391231" elapsed="0.000383"/>
+<status status="PASS" start="2026-03-05T13:23:14.912515" elapsed="0.000282"/>
 </kw>
 <doc>Click the Login button in the top navigation bar</doc>
-<status status="PASS" start="2026-03-04T23:43:49.211227" elapsed="0.180537"/>
+<status status="PASS" start="2026-03-05T13:23:14.533870" elapsed="0.379046"/>
 </kw>
 <kw name="Enter Login Credentials" owner="naukri">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${EMAIL_FIELD}</arg>
 <arg>timeout=${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.393096" elapsed="0.253841"/>
+<status status="PASS" start="2026-03-05T13:23:14.913616" elapsed="0.249969"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>${EMAIL_FIELD}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.647190" elapsed="0.047736"/>
+<status status="PASS" start="2026-03-05T13:23:15.163767" elapsed="0.029046"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:49.695726" level="INFO">Typing text 'nagaraju.251n@gmail.com' into text field 'xpath=//input[@placeholder='Enter your active Email ID / Username']'.</msg>
+<msg time="2026-03-05T13:23:15.193225" level="INFO">Typing text 'nagaraju.251n@gmail.com' into text field 'xpath=//input[@placeholder='Enter your active Email ID / Username']'.</msg>
 <arg>${EMAIL_FIELD}</arg>
 <arg>${email}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.695181" elapsed="0.143011"/>
+<status status="PASS" start="2026-03-05T13:23:15.193010" elapsed="0.063416"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${PASSWORD_FIELD}</arg>
 <arg>timeout=${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.838454" elapsed="0.028493"/>
+<status status="PASS" start="2026-03-05T13:23:15.256677" elapsed="0.016152"/>
 </kw>
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>${PASSWORD_FIELD}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.867175" elapsed="0.030711"/>
+<status status="PASS" start="2026-03-05T13:23:15.272996" elapsed="0.021327"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:49.898402" level="INFO">Typing text 'Idntknow' into text field 'xpath=//input[@placeholder='Enter your password']'.</msg>
+<msg time="2026-03-05T13:23:15.294710" level="INFO">Typing text 'Idntknow' into text field 'xpath=//input[@placeholder='Enter your password']'.</msg>
 <arg>${PASSWORD_FIELD}</arg>
 <arg>${password}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:49.898107" elapsed="0.115927"/>
+<status status="PASS" start="2026-03-05T13:23:15.294491" elapsed="0.075232"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:50.014441" level="INFO">Credentials entered for: nagaraju.251n@gmail.com</msg>
+<msg time="2026-03-05T13:23:15.370033" level="INFO">Credentials entered for: nagaraju.251n@gmail.com</msg>
 <arg>Credentials entered for: ${email}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.014253" elapsed="0.000234"/>
+<status status="PASS" start="2026-03-05T13:23:15.369887" elapsed="0.000178"/>
 </kw>
 <arg>${email}</arg>
 <arg>${password}</arg>
 <doc>Fill in email and password fields</doc>
-<status status="PASS" start="2026-03-04T23:43:49.392086" elapsed="0.622474"/>
+<status status="PASS" start="2026-03-05T13:23:14.913157" elapsed="0.456962"/>
 </kw>
 <kw name="Submit Login Form" owner="naukri">
 <kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
 <arg>${SUBMIT_BTN}</arg>
 <arg>timeout=${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is enabled.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.014996" elapsed="0.026316"/>
+<status status="PASS" start="2026-03-05T13:23:15.370414" elapsed="0.015616"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:50.041779" level="INFO">Clicking element 'xpath=//button[@type='submit' and contains(text(),'Login')]'.</msg>
+<msg time="2026-03-05T13:23:15.386383" level="INFO">Clicking element 'xpath=//button[@type='submit' and contains(text(),'Login')]'.</msg>
 <arg>${SUBMIT_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.041535" elapsed="0.088013"/>
+<status status="PASS" start="2026-03-05T13:23:15.386195" elapsed="0.053307"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:50.129923" level="INFO">Login form submitted</msg>
+<msg time="2026-03-05T13:23:15.439776" level="INFO">Login form submitted</msg>
 <arg>Login form submitted</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.129783" elapsed="0.000185"/>
+<status status="PASS" start="2026-03-05T13:23:15.439666" elapsed="0.000143"/>
 </kw>
 <doc>Click the Login submit button</doc>
-<status status="PASS" start="2026-03-04T23:43:50.014727" elapsed="0.115309"/>
+<status status="PASS" start="2026-03-05T13:23:15.370238" elapsed="0.069630"/>
 </kw>
 <kw name="Wait Until Location Contains" owner="SeleniumLibrary">
 <arg>naukri.com</arg>
 <arg>timeout=20s</arg>
 <doc>Waits until the current URL contains ``expected``.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.130145" elapsed="0.005595"/>
+<status status="PASS" start="2026-03-05T13:23:15.439948" elapsed="0.003412"/>
 </kw>
 <kw name="Close AI Chat Popup If Present" owner="naukri">
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
@@ -133,196 +135,262 @@
 <arg>${AI_CHAT_POPUP}</arg>
 <arg>timeout=5s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.136573" elapsed="0.020220"/>
+<status status="PASS" start="2026-03-05T13:23:15.444013" elapsed="0.013699"/>
 </kw>
-<msg time="2026-03-04T23:43:50.156963" level="INFO">${popup_visible} = True</msg>
+<msg time="2026-03-05T13:23:15.457852" level="INFO">${popup_visible} = True</msg>
 <var>${popup_visible}</var>
 <arg>Wait Until Element Is Visible</arg>
 <arg>${AI_CHAT_POPUP}</arg>
 <arg>timeout=5s</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.136427" elapsed="0.020564"/>
+<status status="PASS" start="2026-03-05T13:23:15.443884" elapsed="0.013989"/>
 </kw>
 <if>
 <branch type="IF" condition="${popup_visible}">
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:50.157443" level="INFO">AI chat popup detected — attempting to close</msg>
+<msg time="2026-03-05T13:23:15.458229" level="INFO">AI chat popup detected — attempting to close</msg>
 <arg>AI chat popup detected — attempting to close</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.157313" elapsed="0.000173"/>
+<status status="PASS" start="2026-03-05T13:23:15.458127" elapsed="0.000137"/>
 </kw>
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:55.399827" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-21.png"&gt;&lt;img src="selenium-screenshot-21.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2026-03-04T23:43:55.400029" level="FAIL">Element 'xpath=//button[contains(@class,'closeBtn') or contains(@class,'close-btn') or contains(@aria-label,'Close') or contains(@class,'botCloseIcon') or contains(@id,'close')]' not visible after 5 seconds.</msg>
+<msg time="2026-03-05T13:23:20.746312" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-03-05T13:23:20.746565" level="FAIL">Element 'xpath=//button[contains(@class,'closeBtn') or contains(@class,'close-btn') or contains(@aria-label,'Close') or contains(@class,'botCloseIcon') or contains(@id,'close')]' not visible after 5 seconds.</msg>
 <arg>${AI_CHAT_CLOSE_BTN}</arg>
 <arg>timeout=5s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="FAIL" start="2026-03-04T23:43:50.157769" elapsed="5.243955">Element 'xpath=//button[contains(@class,'closeBtn') or contains(@class,'close-btn') or contains(@aria-label,'Close') or contains(@class,'botCloseIcon') or contains(@id,'close')]' not visible after 5 seconds.</status>
+<status status="FAIL" start="2026-03-05T13:23:15.458494" elapsed="5.291345">Element 'xpath=//button[contains(@class,'closeBtn') or contains(@class,'close-btn') or contains(@aria-label,'Close') or contains(@class,'botCloseIcon') or contains(@id,'close')]' not visible after 5 seconds.</status>
 </kw>
-<msg time="2026-03-04T23:43:55.401894" level="INFO">${close_btn_visible} = False</msg>
+<msg time="2026-03-05T13:23:20.749983" level="INFO">${close_btn_visible} = False</msg>
 <var>${close_btn_visible}</var>
 <arg>Wait Until Element Is Visible</arg>
 <arg>${AI_CHAT_CLOSE_BTN}</arg>
 <arg>timeout=5s</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2026-03-04T23:43:50.157604" elapsed="5.244312"/>
+<status status="PASS" start="2026-03-05T13:23:15.458381" elapsed="5.291622"/>
 </kw>
 <if>
 <branch type="IF" condition="${close_btn_visible}">
 <kw name="Click Element" owner="SeleniumLibrary">
 <arg>${AI_CHAT_CLOSE_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:55.402162" elapsed="0.000024"/>
+<status status="NOT RUN" start="2026-03-05T13:23:20.750232" elapsed="0.000020"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>✅ AI chat popup closed successfully</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:55.402267" elapsed="0.000019"/>
+<status status="NOT RUN" start="2026-03-05T13:23:20.750323" elapsed="0.000017"/>
 </kw>
-<status status="NOT RUN" start="2026-03-04T23:43:55.402008" elapsed="0.000309"/>
+<status status="NOT RUN" start="2026-03-05T13:23:20.750089" elapsed="0.000279"/>
 </branch>
 <branch type="ELSE">
 <kw name="Press Keys" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:55.402708" level="INFO">Sending key(s) ('ESCAPE',) to page.</msg>
-<msg time="2026-03-04T23:43:55.402816" level="INFO">Pressing special key ESCAPE to browser.</msg>
-<msg time="2026-03-04T23:43:55.402855" level="INFO">Releasing special key ESCAPE.</msg>
+<msg time="2026-03-05T13:23:20.750728" level="INFO">Sending key(s) ('ESCAPE',) to page.</msg>
+<msg time="2026-03-05T13:23:20.750795" level="INFO">Pressing special key ESCAPE to browser.</msg>
+<msg time="2026-03-05T13:23:20.750828" level="INFO">Releasing special key ESCAPE.</msg>
 <arg>None</arg>
 <arg>ESCAPE</arg>
 <doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<status status="PASS" start="2026-03-04T23:43:55.402425" elapsed="0.015352"/>
+<status status="PASS" start="2026-03-05T13:23:20.750465" elapsed="0.007230"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:55.418111" level="INFO">✅ AI chat popup dismissed via ESC key</msg>
+<msg time="2026-03-05T13:23:20.757980" level="INFO">✅ AI chat popup dismissed via ESC key</msg>
 <arg>✅ AI chat popup dismissed via ESC key</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:55.417974" elapsed="0.000183"/>
+<status status="PASS" start="2026-03-05T13:23:20.757866" elapsed="0.000150"/>
 </kw>
-<status status="PASS" start="2026-03-04T23:43:55.402355" elapsed="0.015868"/>
+<status status="PASS" start="2026-03-05T13:23:20.750402" elapsed="0.007651"/>
 </branch>
-<status status="PASS" start="2026-03-04T23:43:55.401985" elapsed="0.016282"/>
+<status status="PASS" start="2026-03-05T13:23:20.750066" elapsed="0.008029"/>
 </if>
-<status status="PASS" start="2026-03-04T23:43:50.157120" elapsed="5.261177"/>
+<status status="PASS" start="2026-03-05T13:23:15.457974" elapsed="5.300150"/>
 </branch>
 <branch type="ELSE">
 <kw name="Log" owner="BuiltIn">
 <arg>No AI chat popup detected — continuing</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:55.418416" elapsed="0.000022"/>
+<status status="NOT RUN" start="2026-03-05T13:23:20.758233" elapsed="0.000020"/>
 </kw>
-<status status="NOT RUN" start="2026-03-04T23:43:55.418331" elapsed="0.000140"/>
+<status status="NOT RUN" start="2026-03-05T13:23:20.758154" elapsed="0.000130"/>
 </branch>
-<status status="PASS" start="2026-03-04T23:43:50.157087" elapsed="5.261410"/>
+<status status="PASS" start="2026-03-05T13:23:15.457945" elapsed="5.300361"/>
 </if>
 <doc>Closes the AI chat/bot popup if it appears after login</doc>
-<status status="PASS" start="2026-03-04T23:43:50.136161" elapsed="5.282378"/>
+<status status="PASS" start="2026-03-05T13:23:15.443657" elapsed="5.314688"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:55.418769" level="INFO">✅ Successfully logged in as nagaraju.251n@gmail.com</msg>
+<msg time="2026-03-05T13:23:20.758515" level="INFO">✅ Successfully logged in as nagaraju.251n@gmail.com</msg>
 <arg>✅ Successfully logged in as ${email}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:55.418643" elapsed="0.000163"/>
+<status status="PASS" start="2026-03-05T13:23:20.758411" elapsed="0.000135"/>
 </kw>
 <arg>${USERNAME}</arg>
 <arg>${PASSWORD}</arg>
 <doc>Full login flow: nav click → credentials → submit → close popup</doc>
-<status status="PASS" start="2026-03-04T23:43:49.209972" elapsed="6.208887"/>
+<status status="PASS" start="2026-03-05T13:23:14.533579" elapsed="6.225025"/>
 </kw>
 <kw name="Click View Profile" owner="naukri">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${USER_AVATAR}</arg>
-<arg>timeout=${TIMEOUT}</arg>
+<arg>timeout=10s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:55.419621" elapsed="0.025299"/>
+<status status="PASS" start="2026-03-05T13:23:20.759320" elapsed="0.016018"/>
 </kw>
+<msg time="2026-03-05T13:23:20.775467" level="INFO">${avatar_found} = True</msg>
+<var>${avatar_found}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${USER_AVATAR}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-03-05T13:23:20.759213" elapsed="0.016274"/>
+</kw>
+<if>
+<branch type="IF" condition="${avatar_found}">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:55.445364" level="INFO">Clicking element 'xpath=//div[contains(@class,'nI-gNb-drawer__icon')]'.</msg>
+<msg time="2026-03-05T13:23:20.775881" level="INFO">Clicking element 'xpath=//div[contains(@class,'nI-gNb-drawer__icon')]'.</msg>
 <arg>${USER_AVATAR}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:55.445140" elapsed="0.092369"/>
+<status status="PASS" start="2026-03-05T13:23:20.775717" elapsed="0.065852"/>
 </kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${VIEW_PROFILE_LINK}</arg>
-<arg>timeout=${TIMEOUT}</arg>
+<arg>timeout=8s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:55.537716" elapsed="0.473473"/>
+<status status="PASS" start="2026-03-05T13:23:20.841915" elapsed="0.445133"/>
 </kw>
+<msg time="2026-03-05T13:23:21.287192" level="INFO">${link_found} = True</msg>
+<var>${link_found}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${VIEW_PROFILE_LINK}</arg>
+<arg>timeout=8s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-03-05T13:23:20.841754" elapsed="0.445458"/>
+</kw>
+<if>
+<branch type="IF" condition="${link_found}">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:56.011585" level="INFO">Clicking element 'xpath=//a[contains(text(),'View &amp; Update Profile')]'.</msg>
+<msg time="2026-03-05T13:23:21.287618" level="INFO">Clicking element 'xpath=//a[contains(text(),'View &amp; Update Profile')]'.</msg>
 <arg>${VIEW_PROFILE_LINK}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:56.011391" elapsed="0.310942"/>
+<status status="PASS" start="2026-03-05T13:23:21.287450" elapsed="0.519161"/>
 </kw>
+<status status="PASS" start="2026-03-05T13:23:21.287302" elapsed="0.519397"/>
+</branch>
+<branch type="ELSE">
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${PROFILE_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2026-03-05T13:23:21.806867" elapsed="0.000022"/>
+</kw>
+<status status="NOT RUN" start="2026-03-05T13:23:21.806742" elapsed="0.000175"/>
+</branch>
+<status status="PASS" start="2026-03-05T13:23:21.287278" elapsed="0.519659"/>
+</if>
+<status status="PASS" start="2026-03-05T13:23:20.775575" elapsed="1.031387"/>
+</branch>
+<branch type="ELSE">
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${PROFILE_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2026-03-05T13:23:21.807040" elapsed="0.000016"/>
+</kw>
+<status status="NOT RUN" start="2026-03-05T13:23:21.806985" elapsed="0.000096"/>
+</branch>
+<status status="PASS" start="2026-03-05T13:23:20.775549" elapsed="1.031551"/>
+</if>
 <kw name="Wait Until Location Contains" owner="SeleniumLibrary">
 <arg>profile</arg>
 <arg>timeout=${TIMEOUT}</arg>
 <doc>Waits until the current URL contains ``expected``.</doc>
-<status status="PASS" start="2026-03-04T23:43:56.322556" elapsed="0.085598"/>
+<status status="PASS" start="2026-03-05T13:23:21.807157" elapsed="0.018415"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:56.408641" level="INFO">✅ Clicked View Profile — now on profile page</msg>
-<arg>✅ Clicked View Profile — now on profile page</arg>
+<msg time="2026-03-05T13:23:21.825962" level="INFO">✅ On profile page</msg>
+<arg>✅ On profile page</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:56.408428" elapsed="0.000275"/>
+<status status="PASS" start="2026-03-05T13:23:21.825831" elapsed="0.000197"/>
 </kw>
-<doc>Click user avatar then click View &amp; Update Profile link</doc>
-<status status="PASS" start="2026-03-04T23:43:55.419406" elapsed="0.989389"/>
+<doc>Navigate to profile page — try UI avatar first, fall back to direct URL</doc>
+<status status="PASS" start="2026-03-05T13:23:20.759023" elapsed="1.067074"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-03-05T13:23:21.927307" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="profile_page.png"&gt;&lt;img src="profile_page.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>filename=profile_page.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-03-05T13:23:21.826647" elapsed="0.100783"/>
 </kw>
 <kw name="Click Edit Pencil Icon" owner="naukri">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-03-05T13:23:24.928716" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-03-05T13:23:21.928212" elapsed="3.000602"/>
+</kw>
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${EDIT_PENCIL_ICON}</arg>
-<arg>timeout=8s</arg>
+<arg>timeout=10s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:56.410244" elapsed="0.526960"/>
+<status status="PASS" start="2026-03-05T13:23:24.929125" elapsed="0.014810"/>
 </kw>
-<msg time="2026-03-04T23:43:56.937422" level="INFO">${clicked} = True</msg>
+<msg time="2026-03-05T13:23:24.944064" level="INFO">${clicked} = True</msg>
 <var>${clicked}</var>
 <arg>Wait Until Element Is Visible</arg>
 <arg>${EDIT_PENCIL_ICON}</arg>
-<arg>timeout=8s</arg>
+<arg>timeout=10s</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2026-03-04T23:43:56.410069" elapsed="0.527385"/>
+<status status="PASS" start="2026-03-05T13:23:24.928982" elapsed="0.015101"/>
 </kw>
 <if>
 <branch type="IF" condition="${clicked}">
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:56.938030" level="INFO">Clicking element 'xpath=//em[contains(@class,'icon edit')]'.</msg>
+<msg time="2026-03-05T13:23:24.944470" level="INFO">Clicking element 'xpath=//em[contains(@class,'icon') and contains(@class,'edit')] | //*[contains(@class,'editIcon')] | //*[contains(@class,'edit-icon')] | //button[contains(@class,'edit')]'.</msg>
 <arg>${EDIT_PENCIL_ICON}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:56.937806" elapsed="0.135168"/>
+<status status="PASS" start="2026-03-05T13:23:24.944311" elapsed="0.058515"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:57.073349" level="INFO">✅ Clicked pencil icon via standard click</msg>
+<msg time="2026-03-05T13:23:25.003120" level="INFO">✅ Clicked pencil icon via standard click</msg>
 <arg>✅ Clicked pencil icon via standard click</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.073197" elapsed="0.000199"/>
+<status status="PASS" start="2026-03-05T13:23:25.003005" elapsed="0.000150"/>
 </kw>
-<status status="PASS" start="2026-03-04T23:43:56.937578" elapsed="0.135865"/>
+<status status="PASS" start="2026-03-05T13:23:24.944168" elapsed="0.059024"/>
 </branch>
 <branch type="ELSE">
 <kw name="Execute Javascript" owner="SeleniumLibrary">
-<arg>document.querySelector("em.icon.edit").click()</arg>
+<var>${js_ok}</var>
+<arg>var el = document.querySelector("em.icon.edit, [class*='editIcon'], [class*='edit-icon'], button[class*='edit'], [data-ga-track*='edit']"); if(el){el.click();return true;}return false;</arg>
 <doc>Executes the given JavaScript code with possible arguments.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:57.073643" elapsed="0.000027"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.003321" elapsed="0.000020"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>not ${js_ok}</arg>
+<arg>Fail</arg>
+<arg>Edit pencil icon not found on profile page</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2026-03-05T13:23:25.003423" elapsed="0.000019"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>✅ Clicked pencil icon via JavaScript fallback</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:57.073782" elapsed="0.000024"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.003510" elapsed="0.000016"/>
 </kw>
-<status status="NOT RUN" start="2026-03-04T23:43:57.073492" elapsed="0.000372"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.003231" elapsed="0.000323"/>
 </branch>
-<status status="PASS" start="2026-03-04T23:43:56.937551" elapsed="0.136344"/>
+<status status="PASS" start="2026-03-05T13:23:24.944149" elapsed="0.059429"/>
 </if>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:57.074051" level="INFO">✅ Edit pencil icon clicked — form should be open now</msg>
+<msg time="2026-03-05T13:23:25.003700" level="INFO">✅ Edit pencil icon clicked — form should be open now</msg>
 <arg>✅ Edit pencil icon clicked — form should be open now</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.073965" elapsed="0.000130"/>
+<status status="PASS" start="2026-03-05T13:23:25.003632" elapsed="0.000098"/>
 </kw>
 <doc>Click the pencil/edit icon next to name on profile page</doc>
-<status status="PASS" start="2026-03-04T23:43:56.409700" elapsed="0.664470"/>
+<status status="PASS" start="2026-03-05T13:23:21.927954" elapsed="3.075827"/>
 </kw>
 <kw name="Update Name And Save" owner="naukri">
 <kw name="Run Keyword And Return Status" owner="BuiltIn">
@@ -330,110 +398,110 @@
 <arg>${NAME_FIELD}</arg>
 <arg>timeout=8s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.075789" elapsed="0.069966"/>
+<status status="PASS" start="2026-03-05T13:23:25.004481" elapsed="0.027410"/>
 </kw>
-<msg time="2026-03-04T23:43:57.145939" level="INFO">${name_visible} = True</msg>
+<msg time="2026-03-05T13:23:25.032028" level="INFO">${name_visible} = True</msg>
 <var>${name_visible}</var>
 <arg>Wait Until Element Is Visible</arg>
 <arg>${NAME_FIELD}</arg>
 <arg>timeout=8s</arg>
 <doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.075635" elapsed="0.070335"/>
+<status status="PASS" start="2026-03-05T13:23:25.004374" elapsed="0.027676"/>
 </kw>
 <if>
 <branch type="IF" condition="${name_visible}">
 <kw name="Clear Element Text" owner="SeleniumLibrary">
 <arg>${NAME_FIELD}</arg>
 <doc>Clears the value of the text-input-element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.146328" elapsed="0.108293"/>
+<status status="PASS" start="2026-03-05T13:23:25.032272" elapsed="0.059786"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:57.255268" level="INFO">Typing text 'Naga Raju Kottu' into text field 'xpath=//input[@name='name' or @id='name' or contains(@placeholder,'Name') or contains(@placeholder,'name')]'.</msg>
+<msg time="2026-03-05T13:23:25.092654" level="INFO">Typing text 'Naga Raju Kottu' into text field 'xpath=//input[@name='name' or @id='name' or contains(@placeholder,'Name') or contains(@placeholder,'name')]'.</msg>
 <arg>${NAME_FIELD}</arg>
 <arg>${new_name}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.254858" elapsed="0.147229"/>
+<status status="PASS" start="2026-03-05T13:23:25.092405" elapsed="0.103278"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:57.402548" level="INFO">✅ Entered name: Naga Raju Kottu</msg>
+<msg time="2026-03-05T13:23:25.196057" level="INFO">✅ Entered name: Naga Raju Kottu</msg>
 <arg>✅ Entered name: ${new_name}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.402345" elapsed="0.000256"/>
+<status status="PASS" start="2026-03-05T13:23:25.195890" elapsed="0.000207"/>
 </kw>
-<status status="PASS" start="2026-03-04T23:43:57.146110" elapsed="0.256544"/>
+<status status="PASS" start="2026-03-05T13:23:25.032133" elapsed="0.164003"/>
 </branch>
 <branch type="ELSE">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${FIRST_NAME_FIELD}</arg>
 <arg>timeout=8s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:57.402834" elapsed="0.000022"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.196305" elapsed="0.000020"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
 <arg>${FIRST_NAME_FIELD}</arg>
 <arg>${new_name}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:57.402934" elapsed="0.000018"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.196417" elapsed="0.000021"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>✅ Entered name in first name field: ${new_name}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-03-04T23:43:57.403060" elapsed="0.000019"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.196553" elapsed="0.000035"/>
 </kw>
-<status status="NOT RUN" start="2026-03-04T23:43:57.402707" elapsed="0.000404"/>
+<status status="NOT RUN" start="2026-03-05T13:23:25.196182" elapsed="0.000450"/>
 </branch>
-<status status="PASS" start="2026-03-04T23:43:57.146077" elapsed="0.257061"/>
+<status status="PASS" start="2026-03-05T13:23:25.032113" elapsed="0.164561"/>
 </if>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${SAVE_BTN}</arg>
 <arg>timeout=${TIMEOUT}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.403205" elapsed="0.023467"/>
+<status status="PASS" start="2026-03-05T13:23:25.196757" elapsed="0.017029"/>
 </kw>
 <kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-04T23:43:57.427167" level="INFO">Clicking element 'xpath=//button[normalize-space(text())='Save' or normalize-space(text())='Save Changes'] | //button[@type='submit' and (contains(@class,'save') or contains(@class,'Save'))]'.</msg>
+<msg time="2026-03-05T13:23:25.214223" level="INFO">Clicking element 'xpath=//button[normalize-space(text())='Save' or normalize-space(text())='Save Changes'] | //button[@type='submit' and (contains(@class,'save') or contains(@class,'Save'))]'.</msg>
 <arg>${SAVE_BTN}</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.426909" elapsed="0.094239"/>
+<status status="PASS" start="2026-03-05T13:23:25.213995" elapsed="0.098300"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:57.521550" level="INFO">✅ Clicked Save — name updated to: Naga Raju Kottu</msg>
+<msg time="2026-03-05T13:23:25.312739" level="INFO">✅ Clicked Save — name updated to: Naga Raju Kottu</msg>
 <arg>✅ Clicked Save — name updated to: ${new_name}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.521357" elapsed="0.000292"/>
+<status status="PASS" start="2026-03-05T13:23:25.312552" elapsed="0.000225"/>
 </kw>
 <doc>Clear name field, enter new name and click Save</doc>
-<status status="PASS" start="2026-03-04T23:43:57.075203" elapsed="0.446532"/>
+<status status="PASS" start="2026-03-05T13:23:25.004145" elapsed="0.308692"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:43:57.522381" level="INFO">✅ Name updated to 'Naga Raju Kottu' and saved successfully</msg>
+<msg time="2026-03-05T13:23:25.313474" level="INFO">✅ Name updated to 'Naga Raju Kottu' and saved successfully</msg>
 <arg>✅ Name updated to 'Naga Raju Kottu' and saved successfully</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.522221" elapsed="0.000213"/>
+<status status="PASS" start="2026-03-05T13:23:25.313359" elapsed="0.000151"/>
 </kw>
 <doc>Login to Naukri → Close AI popup → Click View Profile
 → Click Edit pencil icon → Update Name → Click Save</doc>
 <tag>naukri</tag>
 <tag>positive</tag>
 <tag>smoke</tag>
-<status status="PASS" start="2026-03-04T23:43:49.208428" elapsed="8.314355"/>
+<status status="PASS" start="2026-03-05T13:23:14.532894" elapsed="10.780833"/>
 </test>
 <kw name="Close Naukri Browser" owner="naukri" type="TEARDOWN">
 <kw name="Close All Browsers" owner="SeleniumLibrary">
 <doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" start="2026-03-04T23:43:57.524626" elapsed="6.351781"/>
+<status status="PASS" start="2026-03-05T13:23:25.314736" elapsed="6.465413"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2026-03-04T23:44:03.876913" level="INFO">Browser closed</msg>
+<msg time="2026-03-05T13:23:31.780441" level="INFO">Browser closed</msg>
 <arg>Browser closed</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2026-03-04T23:44:03.876738" elapsed="0.000219"/>
+<status status="PASS" start="2026-03-05T13:23:31.780325" elapsed="0.000150"/>
 </kw>
 <doc>Close all browser windows</doc>
-<status status="PASS" start="2026-03-04T23:43:57.524366" elapsed="6.352659"/>
+<status status="PASS" start="2026-03-05T13:23:25.314559" elapsed="6.465972"/>
 </kw>
 <doc>Naukri Automation — Login → View Profile → Edit → Update Name → Save</doc>
-<status status="PASS" start="2026-03-04T23:43:45.458304" elapsed="18.418764"/>
+<status status="PASS" start="2026-03-05T13:23:10.389188" elapsed="21.391380"/>
 </suite>
 <statistics>
 <total>
@@ -449,6 +517,5 @@
 </suite>
 </statistics>
 <errors>
-<msg time="2026-03-04T23:43:45.487077" level="ERROR">Error in file 'C:\Users\kottu\Downloads\naukri\naukri.resource' on line 22: Setting variable '${PROFILE_PAGE_HEADING} xpath=//div[contains(@class,'name-heading') or contains(@class,'nameHeading') or contains(@class,'profileName')]' failed: Invalid variable name '${PROFILE_PAGE_HEADING} xpath=//div[contains(@class,'name-heading') or contains(@class,'nameHeading') or contains(@class,'profileName')]'.</msg>
 </errors>
 </robot>
